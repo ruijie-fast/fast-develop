@@ -23,10 +23,10 @@
               </el-form-item> -->
               <el-form-item label="报表布局">
                 <label>行&nbsp;&nbsp;</label><el-select v-model="form.row" placeholder="请选择行数" @change="rowChange">
-                  <el-option v-for="item in 6" :label="item" :value="item"></el-option>
+                  <el-option v-for="item in 4" :label="item" :value="item"></el-option>
                 </el-select>
                 <label>&nbsp;&nbsp;列&nbsp;&nbsp;</label><el-select v-model="form.col" placeholder="请选择列数" @change="colChange">
-                   <el-option v-for="item in 3" :label="item" :value="item"></el-option>
+                   <el-option v-for="item in 2" :label="item" :value="item"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="报表描述">

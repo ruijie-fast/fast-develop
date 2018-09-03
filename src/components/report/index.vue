@@ -77,6 +77,13 @@ export default {
     this.initPage();
     this.findReports();
   },
+  watch:{
+    key(curVal,oldVal){
+      if(curVal != oldVal) {
+        this.findReports();
+      }
+    }
+  },
   methods: {
     initPage() {
       let self = this;
