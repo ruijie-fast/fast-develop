@@ -4,7 +4,7 @@
       <el-button type="primary" icon="el-icon-plus" style="padding: 10px 20px;" class="left" @click="go2CreateForm">创建新表单</el-button>
     </div>
     <div class="right">
-      <el-input maxlength="100" placeholder="请输入表单名称/业务功能名" v-model="query.key" size="medium">
+      <el-input maxlength="100" placeholder="请输入表单名称/业务功能名" v-model="query.keyword" size="medium">
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
       </el-input>
     </div>
@@ -68,7 +68,7 @@ export default {
   data () {
     return {
       query: {
-        key:"",
+        keyword:"",
         page_no:'1',
         page_size:'10'
       },
@@ -154,6 +154,11 @@ export default {
     this.initPage();
     this.searchForms();
   },
+  computed: {
+    keyword() {
+      return this.query.keyword
+    }
+  },
   methods: {
     initPage() {
       let self = this;
@@ -168,7 +173,7 @@ export default {
     searchForms(){
       let self = this;
       let sysGen = {};
-      sysGen.tableName = self.query.key;
+      sysGen.tableName = self.query.keyword;
       sysGen.page = self.query.page_no;
       sysGen.pageSize = self.query.page_size;
       this.$axios
@@ -241,6 +246,13 @@ export default {
     go2Generate(row){
 
     },
+  },
+  watch: {
+    keyword(curVal, oldVal){
+      if (curVal != oldVal) {
+        this.searchForms();
+      }
+    }
   }
 }
 </script>
