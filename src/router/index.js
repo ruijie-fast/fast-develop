@@ -7,6 +7,7 @@ import login from '@/components/login'
 import report from '@/components/report/index'
 import generate from '@/components/generate/index'
 import home from '@/components/home'
+import preview from '@/components/report/preview'
 
 Vue.use(Router)
 
@@ -30,6 +31,9 @@ const router = new Router({
         },
         {
           path: 'generate',name:'generate',component: generate,meta: {requireAuth: true}
+        },
+        {
+          path: 'preview',name:'preview',component: preview,meta: {requireAuth: true}
         }
       ]
     },

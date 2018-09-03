@@ -5,7 +5,7 @@
           <el-button type="primary" icon="el-icon-plus" style="padding: 10px 20px;" @click="go2CreateReport">创建报表</el-button>
         </div>
         <div class="right">
-            <el-input maxlength="100" placeholder="请输入IP地址或设备名称" v-model="key" size="medium">
+            <el-input maxlength="100" placeholder="请输入报表名称" v-model="key" size="medium">
               <i slot="prefix" class="el-input__icon el-icon-search"></i>
             </el-input>
         </div>
@@ -42,6 +42,7 @@
                   <el-button style="padding: 0px;" type="text" @click="go2Del(scope.row)">删除</el-button>
                   <el-button style="padding: 0px;" type="text" @click="go2Generate(scope.row)">生成代码</el-button>
                   <el-button style="padding: 0px;" type="text" @click="go2Preview(scope.row)">预览</el-button>
+                  <el-button style="padding: 0px;" type="text" @click="go2Download(scope.row)">下载</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -157,10 +158,24 @@ export default {
       
     },
     go2Generate(row){
-
+        let self = this;
+        this.$axios
+          .get("/v1/reports/"+row.id+"/generate")
+          .then(function(response) {
+              self.$message({
+                  type: 'success',
+                  message: '代码已生成，请点击下载按钮下载'
+              });
+          }).catch(function(error) {
+                console.log(error);
+          });
     },
     go2Preview(row){
-
+        let url = "/index/preview";
+        this.$router.push({path: url, query: {reportId: row.id}});
+    },
+    go2Download(row){
+        window.location = "/v1/reports/"+row.id+"/download";
     }
 
   }
